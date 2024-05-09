@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
+        {% for i in m%}
+        {% csrf_token %}
+        <label> FNAME<label>
+        {{ i.fname }}
+        <label> Lname </label>
+        {{ i.lname }}
+        {% endfor %}
+    </form>
+</body>
+</html>
