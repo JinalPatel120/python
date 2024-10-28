@@ -1,0 +1,38 @@
+from dotenv import load_dotenv
+import os
+from kiteconnect import KiteConnect
+
+
+load_dotenv()
+
+API_KEY = os.getenv('KITE_API_KEY')
+API_SECRET = os.getenv('KITE_API_SECRET')
+ACCESS_TOKEN=os.getenv('KITE_ACCESS_TOKEN')
+kite = KiteConnect(api_key=API_KEY,access_token=ACCESS_TOKEN)
+
+
+
+
+
+
+
+KITE_API_KEY=wi71gjy0lde2n48t  
+KITE_API_SECRET=2utx4v7uviccrbssvn1qtrrml5s7a07f
+KITE_ACCESS_TOKEN=qqtEyGzrjckhp5V2EAqzPOe1bBtLe5g7
+
+# DB_NAME='dnoise'
+# DB_USER="kishan1"
+# DB_PASS="Patel@99"
+
+DB_NAME='dnoise'
+DB_USER="root"
+DB_PASS="Sync123$"
+DB_HOST='localhost'
+DB_PORT=3306
+
+BACKEND_CORS_ORIGINS=['http://localhost:3000','http://localhost','http://192.168.1.10:5000','http://192.168.1.2:3000','http://122.179.153.36:3000']
+
+REDIS_URL=redis://localhost:6379/0
+
+
+2utx4v7uviccrbssvn1qtrrml5s7a07f

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/view.css">
+    <script src="assets/view.js" defer></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>User Records</h1>
+    
+    <table id="userTable">    
+        <thead>    
+            <tr>      
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Zipcode</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Technology</th>
+                <th>Hobby</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="btn-container">
+        <button type="button" style="background-color: rgb(19, 135, 223);" onclick="window.location.href='register.html'">Back</button>
+        <button type="button" style="background-color: rgb(186, 186, 49);"onclick="showEditPopup()">Edit </button>
+        <button type="button" style="background-color: rgb(196, 50, 50);"onclick="showDeletePopup()">Delete</button>
+    </div>
+
+    <div id="editPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeEditPopup()">&times;</span>
+            <h2>Edit Options</h2>
+            <p>Select an option:</p>
+            <button onclick="editAll()">Edit All</button>
+            <button onclick="editManually()">Edit Manually</button>
+            <button onclick="closeEditPopup()">Cancel</button>
+        </div>
+    </div>
+
+
+    <div id="deletePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeDeletePopup()">&times;</span>
+            <h2>Delete Confirmation</h2>
+            <p>Select an option:</p>
+            <button onclick="deleteAllUsers()">Delete All</button>
+            <button onclick="deleteSelectedUsers()">Delete Manually</button>
+            <button onclick="closeDeletePopup()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

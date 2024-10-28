@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/view.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>User Details</h1>
+    <div id="userInfo"></div>
+    <button id="deleteButton" onclick="deleteUser()">Delete User</button>
+    <button onclick="window.location.href='view.html'">Back</button>
+    <button id="prevBtn" onclick="prevUser()" disabled>Previous</button>
+    <button id="nextBtn" onclick="nextUser()" disabled>Next</button>
+</div>
+
+<script>
+    let users = []; 
+    let currentIndex = 0; 
+
+    
+    function loadAllUsers() {
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const userData = JSON.parse(localStorage.getItem(key));
+            if (userData) {
+                users.push({ key, ...userData });
+            }
+        }
+    }
+ 
+    function loadUserData(index) {
+        if (index >= 0 && index < users.length) {
+            const userData = users[index];
+            document.getElementById('userInfo').innerHTML = `
+                <p><strong>Name:</strong> ${userData.name}</p>
+                <p><strong>Email:</strong> ${userData.email}</p>
+                <p><strong>Phone:</strong> ${userData.phone}</p>
+                <p><strong>Zipcode:</strong> ${userData.zipcode}</p>
+                <p><strong>DOB:</strong> ${userData.dob}</p>
+                <p><strong>Gender:</strong> ${userData.gender}</p>
+                <p><strong>Technology:</strong> ${userData.technology.join(', ')}</p>
+                <p><strong>Hobby:</strong> ${userData.hobby.join(', ')}</p>
+            `;
+            document.getElementById('deleteButton').dataset.key = userData.key; 
+
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === users.length - 1;
+        }
+    }
+
+ 
+    function prevUser() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadUserData(currentIndex);
+        }
+    }
+
+
+    function nextUser() {
+        if (currentIndex < users.length - 1) {
+            currentIndex++;
+            loadUserData(currentIndex);
+        }
+    }
+
+    function deleteUser() {
+        const key = users[currentIndex].key;
+        if (confirm('Are you sure you want to delete this user?')) {
+            localStorage.removeItem(key);
+            alert('User deleted successfully.');
+
+          
+            users.splice(currentIndex, 1);
+            if (users.length === 0) {
+                document.getElementById('userInfo').innerHTML = '<p>No users available.</p>';
+                document.getElementById('deleteButton').disabled = true;
+                document.getElementById('prevBtn').disabled = true;
+                document.getElementById('nextBtn').disabled = true;
+            } else {
+               
+                if (currentIndex >= users.length) {
+                    currentIndex = users.length - 1;
+                }
+                loadUserData(currentIndex);
+            }
+        }
+    }
+
+    function getUserData() {
+        loadAllUsers();
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+
+        
+        const userIndex = users.findIndex(user => user.key === key);
+        if (userIndex !== -1) {
+            currentIndex = userIndex; 
+            loadUserData(currentIndex); 
+        } else {
+            alert('User not found.');
+            window.location.href = 'view.html'; 
+        }
+    }
+
+    window.onload = getUserData;
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

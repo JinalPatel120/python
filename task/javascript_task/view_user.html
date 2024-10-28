@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/view.css">
+    <title>Update User</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>    User Details</h1>
+    <form id="updateForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" required>
+
+        <label for="zipcode">Zipcode:</label>
+        <input type="text" id="zipcode" required>
+
+
+        <label>Gender:</label>
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <br><br>
+        <label for="hobby">Hobby:</label>
+
+        <select id="hobby" multiple>
+            <option value="Reading">Reading</option>
+            <option value="Traveling">Traveling</option>
+            <option value="Gaming">Gaming</option>
+            <option value="writing">Writing</option>
+            <option value="painting">Painting</option>
+            <option value="photography">Photography</option>
+
+          
+        </select>
+
+        <label for="technology">Technology:</label>
+        <select id="technology" multiple>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+            <option value="React">React</option>
+            <option value="Flutter">Flutter</option>
+            <option value="Android">Android</option>
+        </select>
+
+      
+        <button type="button" onclick="window.location.href='view.html'">Back</button>
+    </form>
+</div>
+
+<script>
+
+    
+function loadUserData() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+
+        const userData = JSON.parse(localStorage.getItem(key));
+        if (userData) {
+            document.getElementById('name').value = userData.name;
+            document.getElementById('email').value = userData.email;
+            document.getElementById('phone').value = userData.phone;
+            document.getElementById('zipcode').value = userData.zipcode;
+           
+            document.querySelector(`input[name="gender"][value="${userData.gender}"]`).checked = true;
+
+            const hobbySelect = document.getElementById('hobby');
+            Array.from(hobbySelect.options).forEach(option => {
+                option.selected = userData.hobby.includes(option.value);
+            });
+
+            const technologySelect = document.getElementById('technology');
+            Array.from(technologySelect.options).forEach(option => {
+                option.selected = userData.technology.includes(option.value);
+            });
+
+        }
+    }
+
+function viewUser(key) {
+    const userData = JSON.parse(localStorage.getItem(key));
+    if (userData) {
+        const userDetailSection = document.getElementById('userDetail');
+        userDetailSection.innerHTML = `
+            <h2>User Details</h2>
+            <p><strong>Name:</strong> ${userData.name}</p>
+            <p><strong>Email:</strong> ${userData.email}</p>
+            <p><strong>Phone:</strong> ${userData.phone}</p>
+            <p><strong>Zipcode:</strong> ${userData.zipcode}</p>
+            <p><strong>Gender:</strong> ${userData.gender}</p>
+            <p><strong>Hobby:</strong> ${userData.hobby.join(', ')}</p>
+            <p><strong>Technology:</strong> ${userData.technology.join(', ')}</p>
+            <button onclick="closeDetails()">Close</button>
+        `;
+        userDetailSection.style.display = 'block'; 
+    }
+}
+
+function closeDetails() {
+    const userDetailSection = document.getElementById('userDetail');
+    userDetailSection.style.display = 'none'; 
+}
+    window.onload = loadUserData; 
+</script>
+
+</body>
+</html>

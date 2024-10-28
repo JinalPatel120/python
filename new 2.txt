@@ -1,0 +1,65 @@
+
+
+app data/local
+
+program data\chocolatey
+lib
+
+
+
+
+id
+name
+ticker
+series
+data_listing
+paid_value
+market_lot
+isin_number
+
+
+
+
+# # Construct the database URL
+# DATABASE_URL = f'mysql://kishan1:"patel@99"@192.168.1.10:3306/dnoise'
+# # sqlurl = 
+# config.set_section_option(section,"DB_USER",os.environ.get('DB_USER'))
+# # config.set_section_option(section,"DB_PASS",urllib.parse.quote())
+# config.set_section_option(section,'DB_NAME',os.environ.get('DB_NAME'))
+# encoded = urllib.parse.quote(DATABASE_URL)
+db_user = "kishan1"
+db_pass = "patel@99"
+db_host = "192.168.1.10"
+db_port = "3306"
+db_name = "dnoise"
+
+# URL-encode the password
+encoded_db_pass = quote_plus(db_pass)
+
+# encoded_char = {"%":"%%"}
+
+if "%" in encoded_db_pass:
+    print("hetle",encoded_db_pass.replace("%","%"))
+    # encoded_db_pass.replace("%","%%%")
+print(encoded_db_pass,"endcode")
+
+# Construct the DATABASE_URL
+DATABASE_URL = f'mysql://{db_user}:{encoded_db_pass}@{db_host}:{db_port}/{db_name}'
+config.set_main_option ("sqlalchemy.url",DATABASE_URL)
+
+
+
+
+
+sqlalchemy.url = mysql://kishan1:Patel%%4099@192.168.1.10:3306/dnoise
+
+
+
+
+work status update 21 sep,2024
+
+- set database configuration of dnoise
+- set redis configuration
+- setup reinstalltion of dnoise
+- check working of all apis
+- update env file

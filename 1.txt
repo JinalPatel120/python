@@ -1,0 +1,77 @@
+from channels.generic.websocket import WebsocketConsumer
+import json
+
+class RiliChatConsumer(WebsocketConsumer):
+    def connect(self):
+        # Accept the WebSocket connection
+        self.accept()
+
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+        
+        # Calculate total_minutes or token count based on message (dummy example)
+        total_minutes = len(message) / 250  # Assuming 1 minute = 250 tokens
+        
+        # Calculate level and progress
+        level = TrainingDataViewSet().get_level(total_minutes)
+        progress = TrainingDataViewSet().calculate_progress(total_minutes)
+        
+        # Respond with updated level and progress
+        self.send(text_data=json.dumps({
+            'message': message,
+            'level': level,
+            'progress': progress
+        }))
+
+
+wss://localhost:8011/ws/$928ab3a0-3821-4be4-8921-d7dc6d41437c
+wss://localhost:8011/ws/928ab3a0-3821-4be4-8921-d7dc6d41437c
+
+
+wss://chat-service-dot-immortal-375010.ew.r.appspot.com/ws/${aiId
+
+
+class YourChatSocketClass:
+    # Other methods...
+
+    def handle_conversation_with_metahuman(self):
+        # Get previous conversations
+        conversations = self.get_metahuman_conversations()
+        
+        # Append user input to messages
+        if self.text_input:
+            self.metahuman_messages.append(
+                {"role": "user", "content": self.text_input}
+            )
+        
+        # Process the conversation with the metahuman
+        self.handle_metahuman_conv()
+
+        # Calculate total words from the entire conversation
+        total_words = sum(len(message['content'].split()) for message in self.metahuman_messages)
+        
+        # Convert total words to total minutes (assuming 250 words = 1 minute)
+        total_minutes = total_words / 250
+
+        # Calculate level and progress based on total_minutes
+        level = self.get_level(total_minutes)  # Assuming you have this method
+        progress = self.calculate_progress(total_minutes)  # Assuming you have this method
+
+        # Optionally, you might want to update the conversation or send this back to the user
+        self.send_progress_update(level, progress)
+
+        # Save the conversation or return results
+        self.save_metahuman_conversation(conversations)
+
+        return {
+            'conversation': [m for m in self.metahuman_messages if not m.get('is_temp', False)],
+            'metahuman': self.created_metahuman,
+            'level': level,
+            'progress': progress,
+        }
+
+    def send_progress_update(self, level, progress):
+        # Here you can send a message back to the user with level and progress
+        pass  # Implement sending logic here
+

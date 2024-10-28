@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User Record</title>
+    <link rel="stylesheet" href="assets/view.css" />
+    <script src="assets/edit_record.js" defer></script>
+    <script src="assets/validation.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Update User</h1>
+      <form id="updateForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" />
+        <div id="nameError" class="error"></div>
+        <br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" />
+        <div id="emailError" class="error"></div>
+        <br />
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" />
+        <div id="phoneError" class="error"></div>
+        <br />
+
+        <label for="zipcode">Zipcode:</label>
+        <input type="text" id="zipcode" />
+        <div id="zipcodeError" class="error"></div>
+        <br />
+
+        <label for="dob">DOB:</label>
+        <input type="text" id="dob" placeholder="MM-DD-YYYY" />
+        <div id="dobError" class="error"></div>
+        <br />
+
+        <label>Gender:</label>
+        <label
+          ><input type="radio" name="gender" value="Male"  />
+          Male</label
+        >
+        <label
+          ><input type="radio" name="gender" value="Female" /> Female</label
+        >
+        <div id="genderError" class="error"></div>
+        <br /><br />
+
+        <label for="hobby">Hobby:</label>
+        <select id="hobby" multiple>
+          <option value="Reading">Reading</option>
+          <option value="Traveling">Traveling</option>
+          <option value="Gaming">Gaming</option>
+          <option value="Writing">Writing</option>
+          <option value="Painting">Painting</option>
+          <option value="Photography">Photography</option>
+        </select>
+        <div id="hobbyError" class="error"></div>
+        <br />
+
+        <label for="technology">Technology:</label>
+        <select id="technology" multiple>
+          <option value="JavaScript">JavaScript</option>
+          <option value="Python">Python</option>
+          <option value="Java">Java</option>
+          <option value="React">React</option>
+          <option value="Flutter">Flutter</option>
+          <option value="Android">Android</option>
+        </select>
+        <div id="technologyError" class="error"></div>
+        <br />
+
+        <button type="submit">Update User</button>
+        <button type="button" onclick="window.location.href='view.html'">
+          Cancel
+        </button>
+        <button type="button" id="prevBtn" onclick="prevUser()">
+          Previous
+        </button>
+        <button type="button" id="nextBtn" onclick="nextUser()">Next</button>
+      </form>
+    </div>
+  </body>
+</html>
